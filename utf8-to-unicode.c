@@ -35,9 +35,7 @@ int count_utf8_bytes(uint8_t c)
 	}
 }
 
-/* char 类型的变量向右移位时，左边多出的位可能会被设为1，因此强制 argv 为
- * 无符号的 */
-int main(int argc, unsigned char *argv[])
+int main(int argc, char *argv[])
 {
 	if (argc == 1) {
 		fprintf(stderr, "Usage: %s <WORDS> [TO] [BE] [CONVERTED]...\n",
@@ -50,6 +48,8 @@ int main(int argc, unsigned char *argv[])
 	int nprefix;
 	uint32_t unicode = 0;
 	for (i = 1; i < argc; i++) {
+		printf("%s = ", argv[i]);
+
 		for (j = 0; argv[i][j] != '\0';
 				j++) {
 			/* 开始转换并向 unicode 中填入编码 */
@@ -59,15 +59,15 @@ int main(int argc, unsigned char *argv[])
 				nprefix = 1 + count_prefix_ones(argv[i][j]);
 
 				/* 将 argv[i][j] 的前缀位设为 0 */
-				argv[i][j] = argv[i][j] << nprefix;
-				argv[i][j] = argv[i][j] >> nprefix;
+				argv[i][j] = ((uint8_t) argv[i][j]) << nprefix;
+				argv[i][j] = ((uint8_t) argv[i][j]) >> nprefix;
 
 				/* 将 argv[i][j] 的值插入到 unicode 的末尾 */
 				unicode = unicode << (8-nprefix);
 				unicode = unicode | (uint32_t)(argv[i][j]);
 
-				n_remaining_bytes--;
-				j++;
+				if (--n_remaining_bytes > 0)
+					j++;
 			}
 
 			printf("\\u%04X", unicode);
