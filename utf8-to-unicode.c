@@ -1,6 +1,6 @@
 /* Convert UTF-8 code to Unicode */
 #include <stdio.h>
-#include <inttypes.h>
+#include <stdint.h>
 
 /* 0177 == 01111111(bin), 0377 == 11111111(bin) */
 #define ONES_COUNT_MASK (0177)
