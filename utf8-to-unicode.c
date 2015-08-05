@@ -4,7 +4,6 @@
 
 /* 0177 == 01111111(bin), 0377 == 11111111(bin) */
 #define ONES_COUNT_MASK (0177)
-#define MEET_ZERO (0177)
 #define MEET_ONE (0377)
 
 int count_prefix_ones(uint8_t c)
