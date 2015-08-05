@@ -12,7 +12,3 @@ utf8-to-unicode
 使用 make 工具进行编译。默认编译器为 gcc，如想更换，请在 make 的命令行指定。
 
 > `make # 或者 make CC=clang，以此类推`
-
-帮助除错
-------
-本程序仍然有 bug 以至于无法使用，如果你有任何想法，欢迎PR。
