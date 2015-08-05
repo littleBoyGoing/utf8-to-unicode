@@ -35,7 +35,9 @@ int count_utf8_bytes(uint8_t c)
 	}
 }
 
-int main(int argc, char *argv[])
+/* char 类型的变量向右移位时，左边多出的位可能会被设为1，因此强制 argv 为
+ * 无符号的 */
+int main(int argc, unsigned char *argv[])
 {
 	if (argc == 1) {
 		fprintf(stderr, "Usage: %s <WORDS> [TO] [BE] [CONVERTED]...\n",
